@@ -29,15 +29,22 @@ function addRandomGreeting() {
 
 function goToData() {
     const responsePromise = fetch('/data');
+    responsePromise.then(responsePromise => responsePromise.json());
     responsePromise.then(handleResponse);
 }
 
 function handleResponse(response) {
-  const textPromise = response.text();
+  const textPromise = response.json();
   textPromise.then(addDataDOM);
 }
 
 function addDataDOM(text) {
   const dataContainer = document.getElementById('data-container');
   dataContainer.innerText = text;
+
+  messagesListElement.innerHTML = '';
+  console.log(text);
+  messagesListElement.appendChild(createListElement(text[0]));
+  messagesListElement.appendChild(createListElement(text[1]));
+  messagesListElement.appendChild(createListElement(text[2]));
 }
