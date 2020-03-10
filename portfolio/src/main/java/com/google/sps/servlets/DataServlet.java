@@ -45,5 +45,19 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
+   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      String text = getParameter(request, "comment", "");
+      response.setContentType("text/html;");
+    response.getWriter().println(text);
+  }
+
 
 }
